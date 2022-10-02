@@ -7,6 +7,7 @@
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
     <h3>Installed CLI Plugins</h3>
+    <p>{{dataSource.threads.find (p => p.forumId,'-KxxSma_8IeF6kjukwnv')}}</p>
     <ul>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
@@ -31,10 +32,18 @@
 </template>
 
 <script>
+import dataSource from '@/data.json'
+console.log(dataSource)
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      dataSource: dataSource
+    }
   }
 }
 </script>
