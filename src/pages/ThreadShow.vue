@@ -4,6 +4,17 @@
 
   <post-list :posts="threadPosts"/>
 
+  <div class="col-full">
+      <form @submit.prevent="addPost">
+        <div class="form-group">
+          <textarea v-model="newPostText" name="" id="" cols="30" rows="10" class="form-input"/>
+        </div>
+        <div class="form-actions">
+          <button class="btn-blue">Submit post</button>
+        </div>
+      </form>
+    </div>
+
 </div>
 <div v-else class="col-full text-center">
     <h1>La Wea Not found</h1>
@@ -25,7 +36,8 @@ export default {
   data () {
     return {
       threads: dataSource.threads,
-      posts: dataSource.posts
+      posts: dataSource.posts,
+      newPostText: ''
     }
   },
   computed: {
@@ -36,12 +48,26 @@ export default {
       return this.posts.filter(post => post.threadId === this.id)
     }
   },
-  methods: {},
+  methods: {
+    addPost () {
+      const postId = 'ggfrfqq' + Math.random()
+      const post = {
+        id: postId,
+        text: this.newPostText,
+        publishedAt: Math.floor(Date.now() / 1000),
+        threadId: this.id,
+        userId: 'rpbB8C6ifrYmNDufMERWfQUoa202'
+      }
+      this.posts.push(post)
+      this.thread.posts.push(postId)
+      this.newPostText = ''
+    }
+  },
   components: { PostList }
 }
 </script>
 
-<style scoped>
+<style>
 
 .post-list {
     margin-top: 20px;
