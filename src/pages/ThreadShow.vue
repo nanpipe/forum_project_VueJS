@@ -1,69 +1,43 @@
 <template>
-    <div v-for='thread in threads'
-        :key='thread.id'
-        class="col-large push-top">
-
+<div v-if="thread" class="col-large push-top">
   <h1>{{thread.title}}</h1>
 
-  <div class="post-list">
-    <div v-for='postId in thread.posts' :key='postId'>
-            <!--<p>{{users.find(u => u.id === posts.find(p => p.id === postId).userId).name}}</p>
-            <p>{{posts.find(p => p.id === postId).text}}</p>-->
-            <p></p>
+  <post-list :posts="threadPosts"/>
 
-    </div>
-    <div v-for='postId in thread.posts'
-        :key='postId'
-        class="post">
-
-          <div class="user-info">
-              <a href="#" class="user-name">{{userById(postById(postId).userId).name}}</a>
-
-              <a href="#">
-                  <img class="avatar-large" :src="userById(postById(postId).userId).avatar" alt="">
-              </a>
-
-              <p class="desktop-only text-small">107 posts</p>
-
-          </div>
-
-          <div class="post-content">
-              <div>
-                <p>
-                  {{postById(postId).text}}
-                </p>
-              </div>
-          </div>
-
-          <div class="post-date text-faded">
-            {{postById(postId).publishedAt}}
-          </div>
-
-      </div>
-
-  </div>
 </div>
-
+<div v-else class="col-full text-center">
+    <h1>La Wea Not found</h1>
+    <h2><router-link :to="{name: 'Home'}">Why don't you look for existing stuff?</router-link></h2>
+</div>
 </template>
 
 <script>
 import dataSource from '@/data.json'
+import PostList from '@/components/PostList.vue'
 export default {
+  name: 'ThreadShow',
+  props: {
+    id: {
+      required: true,
+      type: String
+    }
+  },
   data () {
     return {
       threads: dataSource.threads,
-      posts: dataSource.posts,
-      users: dataSource.users
+      posts: dataSource.posts
     }
   },
-  methods: {
-    postById (postId) {
-      return this.posts.find(p => p.id === postId)
+  computed: {
+    thread () {
+      return this.threads.find(thread => thread.id === this.id) //  this.$route.params.id
     },
-    userById (userId) {
-      return this.users.find(u => u.id === userId)
+    threadPosts () {
+      return this.posts.filter(post => post.threadId === this.id)
     }
-  }
+  },
+  methods: {},
+  components: { PostList }
 }
 </script>
 
