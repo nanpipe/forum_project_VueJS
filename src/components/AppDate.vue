@@ -1,6 +1,6 @@
 <template>
-  <span :title="humanFriendly ()">
-        {{diffForHumans()}}
+  <span :title="humanFriendly">
+        {{diffForHumans}}
   </span>
 </template>
 
@@ -19,13 +19,15 @@ export default {
       type: Number
     }
   },
-  methods: {
+  computed: {
     humanFriendly () {
       return dayjs.unix(this.timestamp).format('llll')
     },
     diffForHumans () {
       return dayjs.unix(this.timestamp).fromNow()
     }
+  },
+  methods: {
   }
 }
 </script>
