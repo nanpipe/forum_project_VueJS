@@ -23,11 +23,9 @@
           </p>
         </div>
       </div>
-
       <div class="post-date text-faded">
-        {{post.publishedAt}}
+        <AppDate :timestamp="post.publishedAt" />
       </div>
-
     </div>
 
   </div>
@@ -35,6 +33,8 @@
 
 <script>
 import sourceData from '@/data.json'
+import AppDate from '@/components/AppDate.vue'
+
 export default {
   props: {
     posts: {
@@ -51,6 +51,9 @@ export default {
     userById (userId) {
       return this.users.find(p => p.id === userId)
     }
+  },
+  components: {
+    AppDate
   }
 }
 </script>
