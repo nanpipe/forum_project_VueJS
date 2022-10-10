@@ -1,16 +1,17 @@
 <template>
-  <ThreadList :threads="threads"/>
+  <!--<ThreadList :threads="threads"/>-->
+  <ForumList :forums="forums"/>
 </template>
 
 <script>
 import dataSource from '@/data.json'
-import ThreadList from '@/components/ThreadList.vue'
+// import ThreadList from '@/components/ThreadList.vue'
+import ForumList from '@/components/ForumList.vue'
 export default {
   data () {
     return {
       threads: dataSource.threads,
-      posts: dataSource.posts,
-      users: dataSource.users
+      forums: dataSource.forums
     }
   },
   /*  methods: {
@@ -21,7 +22,7 @@ export default {
       return this.users.find(u => u.id === userId)
     }
   },  */
-  components: { ThreadList }
+  components: { ForumList } // missing ThreadList,
 }
 </script>
 
