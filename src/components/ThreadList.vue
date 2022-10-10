@@ -40,16 +40,12 @@
 
 <script>
 import dataSource from '@/data.json'
-import AppDate from '@/components/AppDate.vue'
 export default {
   props: {
     threads: {
       required: true,
       type: Array
     }
-  },
-  components: {
-    AppDate
   },
   data () {
     return {
